@@ -1,0 +1,25 @@
+<p>&nbsp;</p>
+<p><b>{title}</b></p>
+<table>
+	<f:for each="{items}" key="label" as="item">
+		
+		<f:if condition="{item.level}<{level}">
+			<tr>
+				<td nowrap>{label}</td>
+				<td>
+					<f:if condition="{item.level}==1">
+						error
+					</f:if>
+					<f:if condition="{item.level}==2">
+						warning
+					</f:if>
+					<f:if condition="{item.level}==3">
+						&nbsp;
+					</f:if>
+				</td>
+				<td nowrap>{item.tag}</td><td nowrap>{item.msg}</td>
+			</tr>
+		</f:if>		
+	</f:for>
+</table>
+ 

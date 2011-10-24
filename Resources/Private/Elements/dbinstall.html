@@ -1,0 +1,35 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace appfactory=Tx_MobileAppFactory_ViewHelpers}
+
+<f:layout name="FCE" />
+<f:section name="Configuration">
+	<fed:fce id="jqdbinstall" label="JQuery DB install" enabled="TRUE">
+		<fed:fce.field.group name="db" label="Link" internalType="db" allowed="tx_mobileappfactory_domain_model_mobiledb" minItems="1" maxItems="1" size="1" />
+	</fed:fce>
+</f:section>
+
+<f:section name="Preview">
+ {table} 
+</f:section>
+ 
+<f:section name="Main">
+	
+	<fed:script index="8">
+			$(document).ready(function(){
+				<appfactory:installDb db="{db}">
+					<appfactory:start>
+						console.log('start');
+					</appfactory:start>
+					<appfactory:finish>
+						console.log('finish');
+					</appfactory:finish>
+					<appfactory:error>
+						console.log('error');
+					</appfactory:error>
+				</appfactory:installDb>	
+				
+			});
+		
+	</fed:script>
+	
+</f:section>

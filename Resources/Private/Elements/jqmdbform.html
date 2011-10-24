@@ -1,0 +1,81 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace appfactory=Tx_MobileAppFactory_ViewHelpers}
+
+<f:layout name="FCE" />
+<f:section name="Configuration">
+	<fed:fce id="mafdbform" label="Mobile DB form" enabled="TRUE">
+		<fed:fce.field.input name="formName" label="Form name" eval="trim" />
+		<fed:fce.field.text name="fields" label="Fields"  />
+		<fed:fce.field.group name="table" label="Link" internalType="db" allowed="tx_mobileappfactory_domain_model_mobiletable" minItems="1" maxItems="1" size="1" />
+		<fed:page.field.select name="theme" label="Submit button theme" items="{0: '',1: 'a',2: 'b',3: 'c',4: 'd',5: 'e'}" />
+	</fed:fce>
+</f:section>
+
+<f:section name="Preview">
+ {table} 
+</f:section>
+ 
+<f:section name="Main">
+	<appfactory:DBForm name='{formName}' attr='{data-ajax: "false"}' table="{table}" fields="{fields}">
+		<appfactory:DBFormExtra>
+			<button data-theme="{theme}" id="submit" rel="external">Submit</button>
+		</appfactory:DBFormExtra>
+		<appfactory:DBFormScript>
+			$("#submit").click(function(){
+				var formName='#{formName}';
+				if ($(formName).valid()){
+					//var dbName='<appfactory:GetDBName table="{table}"/>';
+					var tableName='<appfactory:GetTableName table="{table}"/>';
+					var fields=$('#{formName}').ajaxForm().formToArray();
+					//var dbConfig=new Object()
+					//dbConfig.name=dbName;
+					//var db=DB(dbConfig);
+					localDB.update(tableName,fields);
+				}
+				
+			});	
+				
+			$('#{formName}').validate({
+				
+			});
+			
+			if (localDB.getCurrentTableRow('<appfactory:GetTableName table="{table}"/>')){
+				
+				var tableName='<appfactory:GetTableName table="{table}"/>';
+				//var fields=$('#{formName}').ajaxForm().formToArray();
+				localDB.getRecord(tableName,
+					localDB.getCurrentTableRow(tableName),
+					function(record){	
+						console.log('ok',record);
+						if (record){
+							for(var i in record ){
+								var value=record[i];
+								console.log(i,value);
+								$("input[type='text'][name='" + i + "']").val(value);
+								$("input[type='password'][name='" + i + "']").val(value);
+								$("input[type='hidden'][name='" + i + "']").val(value);
+								/*if (i=='description')
+									//jQuery.wymeditors(0).html(data[i]);
+									$('#description').tinymce().execCommand('mceInsertContent',false,data[i]);
+								else
+									$theForm.find("textarea[name='" + i + "']").val(data[i]);*/
+								$("select[name='" + i + "']").children("option[value='" + value + "']").attr("selected",true);
+								$("input[type='radio'][name='" + i + "'][value='" + value + "']").attr("checked",true);
+								$("input[type='checkbox'][name='" + i + "'][value='" + value + "']").attr("checked",true);
+							}
+						}
+					},
+					function(error){
+						console.log('error',error)
+					}
+				);
+			}
+			
+			<f:for each="{browseFields}" key="fieldName" as="browseTable">
+					console.log('bt','{browseTable}',localDB.getCurrentTableRow('{browseTable}'));
+					$("input[type='hidden'][name='{fieldName}']").val(localDB.getCurrentTableRow('{browseTable}'));
+			</f:for>
+			
+		</appfactory:DBFormScript>
+	</appfactory:DBForm>
+</f:section>

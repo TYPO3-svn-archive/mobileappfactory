@@ -1,0 +1,28 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+
+<f:layout name="Page" />
+
+<f:section name="main">
+	<fed:comment comment="This section contains nothing but the Fluid Page definition" />
+	<fed:comment comment="What follows is the main template variables definition. These fields become available under
+		'appearance' when editing a page using this layout" />
+	<fed:page id="default-page">
+		<fed:comment comment="These values are grouped into objects according to their context" />
+		<fed:page.field.checkbox name="jQuery.include" label="Include jQuery on this page" />
+		<fed:page.field.select name="header.color" label="Color of header" items="{0: {0: 'red'}, 1: {0: 'green'}}" />
+		<fed:page.field.input name="header.size" label="Font size in header" default="18" />
+
+		<fed:page.field.select name="base.color" label="Base color"
+			items="{0: 'FF0000', 1: '00FF00', 2: '0000FF'}" />
+		<fed:page.field.select name="base.contrast" label="Base contrast - affects color scheme"
+			items="{0: '-64', 1: '-32', 2: '-16', 3: '-8', 4: '-4', 5: '0', 6: '4', 7: '8', 8: '16', 9: '32', 10: '64'}" />
+
+		<fed:page.field.select name="right.width" label="Width of right column"
+			items="{0: '25%', 1: '35%', 2: '50%'}" />
+	</fed:page>
+</f:section>
+
+<f:section name="header">
+	<h1 class="header-color-{header.color}">{page.title}</h1>
+</f:section>
+

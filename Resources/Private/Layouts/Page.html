@@ -1,0 +1,46 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+
+<f:layout name="Page" />
+
+<f:if condition="{jQuery.include}">
+	<fed:script src="{f:uri.resource(path: 'Javascript/ThemeSwitcher.js', extensionName: 'fedexample')}" />
+	<fed:script>
+	jQuery(document).ready(function() {
+		$.fn.themeswitcher && $('<div></div>').css({
+			//position: "absolute",
+			//right: 0,
+			//top: 0
+		}).appendTo('#themeswitcher').themeswitcher({cookieName:''});
+	});
+	</fed:script>
+	<fed:jQuery.cdn jQueryVersion="1" jQueryUIVersion="1"
+			jQueryUITheme="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/black-tie/jquery-ui.css" />
+</f:if>
+
+
+<fed:comment comment="This next section uses values defined in the page properties
+	to regulate some layout properties" />
+<fed:style href="{f:uri.resource(extensionName: 'fedexample', path: 'Stylesheet/Common.css')}" />
+<fed:style>
+	.left {
+		background-color: #FAFAFA; /*#{base.color};*/
+	}
+	/*
+	.right {
+		width: {right.width};
+		background-color: #<fed:format.colorTransform hex="{base.color}" transformAll="{base.contrast}" />;
+	}
+	h1 {
+		color: {header.color} !important;
+	}
+	*/
+</fed:style>
+
+<fed:comment comment="This next statement is only used to include the definition section
+	of the 'real' Fluid Page template, Templates/Page/Default.html" />
+<f:render section="main" />
+
+<fed:comment comment="These next sections render the section sequence from the page template" />
+<f:render section="header" />
+<p>test</p>
+<fed:page.renderContent column="0" />

@@ -1,0 +1,48 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace appfactory=Tx_MobileAppFactory_ViewHelpers}
+
+<f:layout name="FCE" />
+<f:section name="Configuration">
+	<fed:fce id="mafjqmlistview" label="Mobile DB listview" enabled="TRUE">
+		<fed:fce.field.group name="table" label="Link" internalType="db" allowed="tx_mobileappfactory_domain_model_mobiletable" minItems="1" maxItems="1" size="1" />
+		<fed:fce.field.text name="conditions" label="Conditions"  />
+		<fed:fce.field.input name="headerField" label="Header field"  />
+		<fed:fce.field.input name="subField" label="sub field"  />
+		<fed:page.field.select name="theme" label="Submit button theme" items="{0: '',1: 'a',2: 'b',3: 'c',4: 'd',5: 'e'}" />
+	</fed:fce>
+</f:section>
+
+<f:section name="Preview">
+ {table} 
+</f:section>
+ 
+<f:section name="Main">
+	<ul id="listView" data-role="listview" data-inset="false"></ul>
+	<script>
+		localDB.getRecords(
+			'<appfactory:GetTableName table="{table}"/>',
+			{conditions},
+			function (records){
+				console.log('a');
+				//var markup = "<li><b>${header}}</b>${sub}</li>";
+				//$.template( "listItemTemplate", markup );
+				for(i=0, max=records.length; i < max; i++){
+					var record=records.item(i);
+					var headVal=record.{headerField};
+					var subVal='';//record.{subField};
+					console.log(headVal,subVal);
+					//var recdat=[{header: headVal, sub:subVal}]
+					$("#listView").append('<li><a href="?id={button.link}" data-icon="arrow-l" data-iconpos="left" data-rel="" data-transition="slide" data-inline="true">'+headVal+'</a></li>');
+					//$.tmpl( "listItemTemplate", recdat ).appendTo( "#listView" );
+				}
+				$('#listView').listview('refresh');
+			},
+			function(error){
+				console.log(error);
+			}
+		);
+			
+		
+	</script>
+	
+</f:section>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'mobileappfactory'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_mobileappfactory_domain_model_mobileapp">Mobile App</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.name">Name</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.version">Version</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.description">Description</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.buildid">Buildid</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.icon">Icon</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.build_time">Build Time</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.is_dirty">Is Dirty</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.template">Template</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.splash">Splash</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.platforms">Platforms</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.queue_items">Queue Items</label>
+			<label index="tx_mobileappfactory_domain_model_mobileapp.mobiledb">Mobiledb</label>
+			<label index="tx_mobileappfactory_domain_model_mobileplatform">Mobile Platform</label>
+			<label index="tx_mobileappfactory_domain_model_mobileplatform.platform">Platform</label>
+			<label index="tx_mobileappfactory_domain_model_mobileplatform.icon">Icon</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory">Mobile Factory</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.name">Name</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.author">Author</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.company">Company</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.www">Www</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.support">Support</label>
+			<label index="tx_mobileappfactory_domain_model_mobilefactory.apps">Apps</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem">Queue Item</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.buildstart">Buildstart</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.buildend">Buildend</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.appfile">Appfile</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.state">State</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.error">Error</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.errormessage">Errormessage</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.output">Output</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.buildhandler">Buildhandler</label>
+			<label index="tx_mobileappfactory_domain_model_queueitem.platform">Platform</label>
+			<label index="tx_mobileappfactory_domain_model_mobiledb">Mobile D B</label>
+			<label index="tx_mobileappfactory_domain_model_mobiledb.name">Name</label>
+			<label index="tx_mobileappfactory_domain_model_mobiledb.version">Version</label>
+			<label index="tx_mobileappfactory_domain_model_mobiledb.tables">Tables</label>
+			<label index="tx_mobileappfactory_domain_model_mobiletable">Mobile Table</label>
+			<label index="tx_mobileappfactory_domain_model_mobiletable.name">Name</label>
+			<label index="tx_mobileappfactory_domain_model_mobiletable.title">Title</label>
+			<label index="tx_mobileappfactory_domain_model_mobiletable.fields">Fields</label>
+		</languageKey>
+	</data>
+</T3locallang>

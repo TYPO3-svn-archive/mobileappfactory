@@ -1,0 +1,51 @@
+
+
+<div>
+	<div style="clear:both;padding:5px">
+		<f:if condition="{queueInfo.icon}">
+			<span style="float:left"><img src="{queueInfo.icon}"/></span>
+		</f:if>
+		<span style="width:400px;height:60;float:left">
+			<h3>{queueInfo.title}</h3>
+			<p><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:version'  />: {queueInfo.version}</p>
+			<p><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:buildTime'  />:<f:format.date format='d.m.Y - H:i:s'>{app.buildTime}</f:format.date> </p>
+		</span>
+		<div style="clear:both"></div>
+	</div>
+	<div style="clear:both">
+		<f:for each="{queueInfo.platforms}" key="platform" as="status">
+			<div style="margin:5px;width:150px;height:150px;float:left;padding:5px;border:1px solid #adadad;border-radius:3px">
+				<h3><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:{platform}' default="{platform}" /></h3>
+				
+				
+				<f:if condition="{status.state}==1">
+					<p><f:image src='EXT:mobileappfactory/Resources/Public/Icons/ajax-loader.gif' alt="<f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:icon' />"/>
+					<br><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:buildProgress' /></p>
+				</f:if>
+				<f:if condition="{status.state}==2">
+					<p><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:buildDone' /></p>
+					<p><f:link.external uri='{status.link}' target='_blank'><f:image src='EXT:mobileappfactory/Resources/Public/Icons/application_link.png' alt="<f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:icon' />"/> <f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:download' /></f:link.external></p>
+				</f:if>
+				<f:if condition="{status.state}==3">
+					<p style="color:red"><f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:buildError' />:<br>
+						{status.error}
+					</p>	
+						
+				</f:if>
+				<f:if condition="{status.state}==4">
+					<p>Unknown error, check:
+						<f:link.external target="_blank" uri="https://build.phonegap.com/apps/{queueInfo.buildID}">Phonegap build</f:link.external>
+					
+					</p>	
+						
+				</f:if>
+			</div>
+			
+		
+		</f:for>
+	</div>
+	<div style="clear:both"></div>
+</div>		
+	
+ 
+  

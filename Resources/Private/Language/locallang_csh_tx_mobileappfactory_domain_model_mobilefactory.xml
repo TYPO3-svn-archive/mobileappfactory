@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_mobileappfactory_domain_model_mobilefactory</description>
+        <type>CSH</type>
+        <csh_table>tx_mobileappfactory_domain_model_mobilefactory</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="name.description">name</label>
+			<label index="author.description">Name of author</label>
+			<label index="company.description">Name of company</label>
+			<label index="www.description">URL to company pange</label>
+			<label index="support.description">Support email</label>
+			<label index="apps.description">Apps belonging to this factory</label>
+		</languageKey>
+    </data>
+</T3locallang>

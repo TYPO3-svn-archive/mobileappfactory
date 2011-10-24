@@ -1,0 +1,24 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="false"
+  enableClickMenu="false"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="false"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+
+	<f:form action="createFactory" controller="BuildApps" objectName="newFactory" object="newFactory" method="post">
+	<f:render partial="moduleFormHeader" arguments="{closeAction: 'list', factory: factory, app: app}"/>
+	<div id="typo3-docbody">
+		<div id="typo3-inner-docbody">
+			<h2>New mobile Factory"</h2>
+			<f:render partial="factoryForm" />
+		</div>
+	</div>
+	</f:form>
+	
+	
+	
+</f:be.container>

@@ -1,0 +1,40 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="true"
+  enableClickMenu="true"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="true"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+  
+  <div style="background:#000000;color:#ffffff">
+	<f:render partial="showArray" arguments="{level:3,items: builderOutput, title: 'Output'}"/>
+	<f:render partial="showArray" arguments="{level:4,items: builderOutput, title: 'Log'}"/>
+</div>
+  
+  <script type="text/javascript">
+					function frameLoadedx(){
+						<f:if condition="{buildOK}">
+							<f:then>
+								//alert('ok');
+								parent.frameLoaded(true);
+							</f:then><f:else>
+								
+								parent.frameLoaded(false);
+							</f:else>
+						</f:if>	
+					}
+											
+					
+						
+					// Check for browser support of event handling capability
+					if (window.addEventListener)
+					window.addEventListener("load", frameLoadedx, false);
+					else if (window.attachEvent)
+					window.attachEvent("onload", frameLoadedx);
+					else window.onload = frameLoadedx;
+				</script>
+  
+</f:be.container>

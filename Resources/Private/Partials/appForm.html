@@ -1,0 +1,60 @@
+	<div class="palette-header">
+		<strong>App settings</strong><br>
+		<span class="t3-form-palette-field-container">
+			<label class="t3-form-palette-field-label class-main3" for="tx-mobileapp-title"><f:translate key="property.name">[name]</f:translate>:</label>
+			<span class="t3-form-palette-field class-main5">
+				<f:form.textfield property="name" id="tx-mobileapp-name"/>
+			</span>
+		</span>
+		<br>
+		<span class="t3-form-palette-field-container">
+			<label class="t3-form-palette-field-label class-main3" for="tx-mobileapp-description"><f:translate key="property.description">[Description]</f:translate>:</label>
+			<span class="t3-form-palette-field class-main5">
+				<f:form.textarea rows="5" cols="40" property="description" id="tx-mobileapp-description"/>
+			</span>
+		</span>
+		<br><br>
+		<span class="t3-form-palette-field-container">
+			<label class="t3-form-palette-field-label class-main3" for="tx-mobileapp-icon"><f:translate key="property.icon">[icon]</f:translate>:</label>
+			<f:if condition="{app.icon}">
+				<f:image width="50" height="50" src='uploads/tx_mobileappfactory/{app.icon}' alt='<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:icon" />'/>
+				<div>&nbsp;</div>
+			</f:if>
+			<f:form.upload property="icon" id="tx-mobileapp-icon"/>
+		</span>
+		
+		<br><br>
+		<span class="t3-form-palette-field-container">
+			<label class="t3-form-palette-field-label class-main3" for="tx-mobileapp-splash"><f:translate key="property.splash">[splash]</f:translate>:</label>
+			<f:if condition="{app.splash}">
+				<f:image width="50" height="50" src='uploads/tx_mobileappfactory/{app.splash}' alt='<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:splash" />'/>
+				<div>&nbsp;</div>
+			</f:if>
+			<f:form.upload property="splash" id="tx-mobileapp-splash"/>
+		</span>
+		
+	</div>	
+	
+	<f:if condition="{templates}">	
+		<div class="palette-header">
+			<br>
+			<strong>Template</strong><br>
+			<span class="t3-form-palette-field-container">
+				<p>Select a template below to get your app upp and running fast.<br>
+				The templates contains a scaffold to build on.</p>
+				<p>&nbsp;</p>
+				<table>
+					<f:for each="{templates}" key="name" as="template">
+						<tr>
+							<td><f:form.radio name='template' value='{name}' /></td>
+							<td>&nbsp;</td>
+							<td>
+								<strong>{template.title}</strong><br>
+								{template.description}
+							</td>
+						</tr>		
+					 </f:for>
+				</table>
+			</span>	
+		</div>
+	</f:if>

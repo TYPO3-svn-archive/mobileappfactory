@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Mobile App Factory extension in BE module</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="mlang_labels_tabdescr">View / Modify Extension Objects</label>
+            
+			<label index="noFactories">No factories created, before you are able to create any apps you must create a factory</label>
+			<label index="addFactory">Add factory</label>
+			<label index="deleteFactory">Delete factory</label>
+			<label index="editFactory">Edit factory</label>
+			<label index="viewFactory">View factory</label>
+			<label index="factories">Factories</label>
+			<label index="moduleName">Mobile App Factory</label>
+			<label index="noAppsInFactory">No apps created in this factory.</label>
+			<label index="createFirstApp">Create first app in factory?</label>
+			<label index="appsInFactory">Apps in factory</label>
+			<label index="viewApp">View app</label>
+			<label index="editApp">Edit app</label>
+			<label index="compileApp">Compile app</label>
+			<label index="createApp">Create new App</label>
+			<label index="deleteApp">Delete App</label>
+			<label index="isDirty">The contents of your app has changed, you need to create the apps for each platform.</label>
+			<label index="platforms">Mobile platforms</label>
+			<label index="icon">Icon</label>
+			<label index="download">Download</label>
+			<label index="buildProgress">Build in progress, please wait</label>
+			<label index="buildDone">App ready</label>
+			<label index="buildError">Build error</label>
+			<label index="version">Version</label>
+			<label index="buildTime">Build time</label>
+			<label index="ios">IOS (IPhone/IPad)</label>
+			<label index="blackberry">Blackberry</label>
+			<label index="android">Android</label>
+			<label index="symbian">Symbian</label>
+			<label index="webos">webOS</label>
+			
+		</languageKey>
+	</data>
+</T3locallang>

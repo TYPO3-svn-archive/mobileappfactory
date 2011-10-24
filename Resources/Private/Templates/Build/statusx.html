@@ -1,0 +1,89 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="true"
+  enableClickMenu="true"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="true"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+  
+<div class="typo3-fulldoc">
+	<div id="typo3-docheader">
+		<div id="typo3-docheader-row1">
+			<div class="buttonsleft">
+				<div class="buttongroup">
+					<f:be.buttons.icon uri="<f:uri.action action='list' controller='BuildApp' arguments='{factory: factory,app: app}'/>" icon="closedok" title=" {f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp' }  " />
+				</div>
+				<div class="buttongroup">
+					<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editApp" />"><f:link.action action="editApp" controller="BuildApps" arguments="{app: app, factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_edit.png" alt="Edit App" /></f:link.action></span>
+					<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="compile" controller="Build" arguments="{app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+					
+				</div>
+			</div>	
+			<div class="buttonsright">
+				<div class="buttongroup">
+					<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:deleteApp" />"><f:link.action action="deleteApp" controller="BuildApps" arguments="{app: app, factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_delete.png" alt="Delete App" /></f:link.action></span>
+					
+					
+				</div>
+			</div>	
+		</div>
+		<div id="typo3-docheader-row2">
+			<div class="docheader-row2-right">
+					Path: 
+					<span class="typo3-docheader-pagePath"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:moduleName" />
+						<f:if condition="{factory}">
+							/{factory.name}
+						</f:if>
+						<f:if condition="{app}">
+							/{app.name}
+						</f:if>
+						/build
+					</span>
+				</div>
+			
+		</div>
+	</div>	
+
+	<div id="typo3-docbody">
+		<div id="typo3-inner-docbody">
+			<ul class="x-tab-strip x-tab-strip-top">
+	
+		
+				<li class="x-tab-strip-active x-tab-strip-closable">
+					<span class="x-tab-right">
+						<em class="x-tab-left"><span class="x-tab-strip-inner"><span class="x-tab-strip-text">Compile app</span></span></em>
+					</span>
+				</li>
+				<div class="x-clear"></div>
+			</ul>
+
+			<div class="typo3-dyntabmenu-divs" >
+				<f:if condition="{app.isDirty}">
+					<f:then>
+						<div>
+							The contents of your app has changed, you need to compile.
+							<f:be.buttons.icon uri="<f:uri.action action='compile' controller='Build' arguments='{factory: factory,app: app}'/>" icon="closedok" title="Compile app" />	
+						</div>	
+					</f:then><f:else>
+						
+						<f:if condition="{buildInfo}">
+							<f:then>
+								<f:render partial="queueInfo" arguments="{queueInfo: buildInfo, app: app}"/>
+							</f:then><f:else>
+								<div>
+									Your need to compile your app first.
+									<f:be.buttons.icon uri="<f:uri.action action='compile' controller='Build' arguments='{factory: factory,app: app}'/>" icon="closedok" title="Compile app" />
+							</f:else>
+						</f:if>	
+					</f:else>
+				</f:if>	
+			</div>
+		</div>
+	</div>	
+</div> 
+  
+  
+</f:be.container>

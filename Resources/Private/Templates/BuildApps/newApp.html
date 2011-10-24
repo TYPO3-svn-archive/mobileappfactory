@@ -1,0 +1,24 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="false"
+  enableClickMenu="false"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="false"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+
+	
+	<f:form enctype="multipart/form-data" action="createApp" controller="BuildApps" objectName="app" object="{app}" arguments="{factoryx: factory}" method="post">
+	<f:render partial="moduleFormHeader" arguments="{closeAction: 'list', factory: factory, app: app}"/>
+	<div id="typo3-docbody">
+		<div id="typo3-inner-docbody">
+			<h2><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:createApp" /></h2>
+			<f:render partial="appForm" arguments="{templates: templates}"/>
+		</div>
+	</div>
+	</f:form>
+	
+	
+</f:be.container>

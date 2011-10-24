@@ -1,0 +1,35 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="true"
+  enableClickMenu="true"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="true"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+  
+	<f:if condition="{app.isDirty}">
+		<f:then>
+			<div>
+				The contents of your app has changed, you need to compile.
+				<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+				
+				
+			</div>	
+		</f:then><f:else>
+			
+			<f:if condition="{buildInfo}">
+				<f:then>
+					<f:render partial="queueInfo" arguments="{queueInfo: buildInfo, app: app}"/>
+				</f:then><f:else>
+					<div>
+						Your need to compile your app first.
+						<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" controller="BuildApps" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+				</f:else>
+			</f:if>	
+		</f:else>
+	</f:if>	
+  
+  
+</f:be.container>

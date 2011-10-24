@@ -1,0 +1,154 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="true"
+  enableClickMenu="true"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="true"
+  loadExtJsTheme="true"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+
+	<div class="typo3-fulldoc">
+		<div id="typo3-docheader">
+			<div id="typo3-docheader-row1">
+				<div class="buttonsleft">
+					<div class="buttongroup">
+						<f:if condition="{factory}">
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editFactory" />"><f:link.action action="editFactory" arguments="{factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_cascade_edit.png" alt="Edit App" /></f:link.action></span>
+						</f:if>	
+						<f:if condition="{app}">
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editApp" />"><f:link.action action="editApp" arguments="{app: app, factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_edit.png" alt="Edit App" /></f:link.action></span>
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+							
+						</f:if>	
+					</div>
+				</div>		
+			</div>
+			<div id="typo3-docheader-row2">
+				<div class="docheader-row2-right">
+					Path: 
+					<span class="typo3-docheader-pagePath"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:moduleName" />
+						<f:if condition="{factory}">
+							/{factory.name}
+						</f:if>
+						<f:if condition="{app}">
+							/{app.name}
+						</f:if>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody" >
+				<h3>Compiling app</h3>
+				<div id="compilemsg"><p>Compile in progress please,wait</p></div>
+				<div id="compileerror" style="color:red;display:none"><p>Compile done with error!</p></div>
+				<div id="compileok" style="color:green;display:none"><p>Compile done with success!</p></div>
+				<div>
+					<div  style="height:31px;width:31px;position:relative;left:6px;top:10px;z-order:100;margin-top:10px;"><f:image id="compileProgress" src='EXT:mobileappfactory/Resources/Public/Icons/ajax-loader-black.gif' alt="<f:translate key='LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compile' />"/>&nbsp;</div>
+					<div id="compileFrameContainer" style='margin-top:-30px;height:150px;background:#000000;color:#ffffff' >
+				
+				</div>
+				<div id="downloadSection" style='display:none'>
+					<p>&nbsp;</p>
+					<p>Fetch downloads please wait</p>
+					<div id="downloadFrame" style='height:250px'>
+						<div id="downloadProgress" style="position:absolute;margin:20px"></div>
+					</div>
+					<p>&nbsp;</p>
+					<p><a href="" title="refresh" onclick="document.getElementById('dframe').contentWindow.location.reload(true);return false;"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/arrow_refresh.png" alt="refresh" /></a> If some platforms are not ready.</p>
+					<p></p>
+				</div>
+				<script type="text/javascript">
+					
+					
+					function hidediv(id) {
+						//safe function to hide an element with a specified id
+						if (document.getElementById) { // DOM3 = IE5, NS6
+							document.getElementById(id).style.display = 'none';
+						}
+						else {
+							if (document.layers) { // Netscape 4
+								document.id.display = 'none';
+							}
+							else { // IE 4
+								document.all.id.style.display = 'none';
+							}
+						}
+					}
+
+					function showdiv(id) {
+						//safe function to show an element with a specified id
+							  
+						if (document.getElementById) { // DOM3 = IE5, NS6
+							document.getElementById(id).style.display = 'block';
+						}
+						else {
+							if (document.layers) { // Netscape 4
+								document.id.display = 'block';
+							}
+							else { // IE 4
+								document.all.id.style.display = 'block';
+							}
+						}
+					}
+						
+					
+					
+					function frameLoaded(status){
+						hidediv('compilemsg');
+						hidediv('compileProgress');
+						if (status){
+							showdiv('compileok');
+							showdiv('downloadSection');
+							var download = document.createElement("iframe");
+							download.id='dframe';
+							download.src = "<f:uri.action action='status' controller='Build' arguments='{app: app}'/>";
+							download.scrolling = "auto";
+							download.frameborder = "0";
+							download.onload='hidediv("downloadProgress")';
+							//download.allowTransparency="true";
+						        
+							//compile.width = "300px";
+							//compile.height = "800px";
+							document.getElementById("downloadFrame").appendChild(download);
+						}else
+							showdiv('compileerror')
+						
+					}
+											
+					//doesn't block the load event
+					function createIframe(){
+						
+						var compile = document.createElement("iframe");
+						compile.src = "<f:uri.action action='compile' controller='Build' arguments='{app: app}'/>";
+						compile.scrolling = "auto";
+						compile.frameborder = "0";
+						compile.allowTransparency="true";
+						        
+						//compile.width = "300px";
+						//compile.height = "800px";
+						document.getElementById("compileFrameContainer").appendChild(compile);
+					  
+					  
+					};
+						
+					// Check for browser support of event handling capability
+					if (window.addEventListener)
+					window.addEventListener("load", createIframe, false);
+					else if (window.attachEvent)
+					window.attachEvent("onload", createIframe);
+					else window.onload = createIframe;
+				</script>
+	
+			</div>
+		</div>
+	</div>	
+		
+  
+  
+  
+  
+
+</f:be.container>

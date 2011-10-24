@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script src="dbfunctions.js" type="text/javascript"></script>
+</head>
+<body>
+	<h1>db functions test</h1>
+	
+	<script>
+		
+		
+		function doTest(){
+			var options={
+				name:'testdb3',
+				version:'1.0',
+				create:{
+					
+					sql:"CREATE TABLE IF NOT EXISTS DEMO (id INTEGER PRIMARY KEY AUTOINCREMENT, data text,xy int)",
+					callbacks:{
+						start:function(){console.log('create start');},
+						finish:function(){console.log('create done')},
+						error:function(){console.log('create error')}
+					}
+				}
+			}
+			var db=localDB;
+			
+			db.start(options);
+				
+			localDB.update('demo', [{name:'data',value:'test'},{name:'xy',value:'10'} ],function(result){console.log('insert',result.insertId)});
+			localDB.update('demo', [{name:'data',value:'test1'},{name:'xy',value:'20'} ],function(result){});
+				
+			localDB.getRecords('demo',[],function(thx,result){console.log(thx,result)},function(error){console.log(error)});
+			
+			localDB.getRecords('demo',[{field:'id',value:'10'},{field:'xy',value:'20'}],function(thx,result){console.log(thx,result)},function(error){console.log(error)});
+			
+			
+			localDB.setCurrentTableRow('demo','1');
+			
+			localDB.getRecord('demo',
+				localDB.getCurrentTableRow('demo'),
+				function(record){console.log('1',record)},
+				function(error){console.log(error)}
+			)
+			
+			localDB.getRecord('demo',
+				9999,
+				function(record){console.log('9999',record)},
+				function(error){console.log(error)}
+			)
+			
+			console.log('db',localDB);
+			console.log(localDB.getCurrentTableRow('demo'));
+			console.log(localDB.getCurrentTableRow('xyz'));
+			
+		}
+		doTest();
+	</script>	
+	
+</body>
+</html>
+

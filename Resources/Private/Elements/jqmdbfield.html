@@ -1,0 +1,43 @@
+{namespace fed=Tx_Fed_ViewHelpers}
+{namespace appfactory=Tx_MobileAppFactory_ViewHelpers}
+
+<f:layout name="FCE" />
+<f:section name="Configuration">
+	<fed:fce id="mafdbffield" label="Mobile DB field" enabled="TRUE">
+		<fed:fce.field.input name="dbField" label="Field" eval="trim" />
+		<fed:fce.field.group name="table" label="Link" internalType="db" allowed="tx_mobileappfactory_domain_model_mobiletable" minItems="1" maxItems="1" size="1" />
+		<fed:page.field.select name="Show" label="Show as" items="{0: '',1: 'a',2: 'b',3: 'c',4: 'd',5: 'e'}" />
+	</fed:fce>
+</f:section>
+
+<f:section name="Preview">
+ {table} 
+</f:section>
+ 
+<f:section name="Main">
+	
+	<label for="{dbField}">{label}</label>
+	<input id="{dbField}" type="text" name="{dbField}" val="" readonly="readonly"/>
+	<script>
+		$(document).ready(function(){
+			var tableName='<appfactory:GetTableName table="{table}"/>';
+			
+			var id=localDB.getCurrentTableRow(tableName);
+			console.log('{dbField}','id',id);
+			if (id!=0){
+				console.log('{dbField}','id',id);
+				localDB.getRecord(tableName,id,
+					function(record){
+					//console.log('{dbField}','id',id);
+						$('#{dbField}').val(record.{dbField});
+				
+					},
+					function (error){
+						console.log('jqmdbfield',error);
+					}
+				);
+			}
+		});
+	</script>
+	
+</f:section>

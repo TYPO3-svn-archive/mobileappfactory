@@ -1,0 +1,44 @@
+<h1>Mobile App Factory, install instructions</h1>
+<p>Follow instructions below in order to get going.</p> 
+<h2>Folder structure</h2>
+<p>In the T3 installation create the following page structure, all sys folders:</p>
+<pre>
+[T3 root]
+	Mobile Apps
+		mobile data
+		factories
+</pre>
+<h2>Page template</h2>
+<p>
+		<p>1. Create a page template in the sys folder "Mobile apps"</p>
+		<p>2. Include the following static templates:<br><br>
+			<pre>
+	JQuery Mobile (jqmfluid templates)
+	Mobile App Factory (mobile appfactory)
+	Phonegap (phonegap)
+			</pre>
+		</p>
+		<p>3. Enter the following in setup<br> 
+			<pre>
+	plugin.tx_mobileappfactory{
+		persistence.storagePid = [pid of sys folder mobile data]
+		
+		factoryPid=[pid of sys folder factories]
+		
+		#optional if you want another domain than your T3 installation
+		domain=mobile.example.com
+		
+		#settings for the phonegabuild.com service
+		phonegapBuild {
+			#Username and password of a user created on phonegapbuild.com
+			user=[user name]
+			password=[password]
+		}
+	}
+
+			</pre>
+		</p>
+	
+</p>
+<h2>Create your first app</h2>
+<p>Click on the sys folder factories (the one created above) and follow the advices</p> 

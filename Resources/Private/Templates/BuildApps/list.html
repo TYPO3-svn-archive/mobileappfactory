@@ -1,0 +1,319 @@
+<f:be.container
+  pageTitle="Build Apps"
+  enableJumpToUrl="true"
+  enableClickMenu="true"
+  loadPrototype="false"
+  loadScriptaculous="false"
+  loadExtJs="false"
+  loadExtJsTheme="false"
+  extJsAdapter="jQuery"
+  enableExtJsDebug="false">
+
+	<div class="typo3-fulldoc">
+		<div id="typo3-docheader">
+			<div id="typo3-docheader-row1">
+				<div class="buttonsleft">
+					<div class="buttongroup">
+						<f:if condition="{factory}">
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editFactory" />"><f:link.action action="editFactory" arguments="{factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_cascade_edit.png" alt="Edit App" /></f:link.action></span>
+						</f:if>	
+						<f:if condition="{app}">
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editApp" />"><f:link.action action="editApp" arguments="{app: app, factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_edit.png" alt="Edit App" /></f:link.action></span>
+							<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+							
+						</f:if>	
+					</div>
+				</div>		
+			</div>
+			<div id="typo3-docheader-row2">
+				<div class="docheader-row2-right">
+					Path: 
+					<span class="typo3-docheader-pagePath"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:moduleName" />
+						<f:if condition="{factory}">
+							/{factory.name}
+						</f:if>
+						<f:if condition="{app}">
+							/{app.name}
+						</f:if>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="typo3-docbody">
+			<div id="typo3-inner-docbody">	
+				<f:if condition="{showWelcome}">
+					<f:then>
+						<f:render partial="installinfo"  />
+					</f:then><f:else>
+					
+						<f:if condition="{installOK}">
+							<f:then>
+								<f:if condition="{app}">
+								
+									<f:then>
+										<div class="typo3-dyntabmenu-tabs">
+										 	
+											<script>
+												var DTM_array = new Array();
+											 var DTM_origClass = new String();
+									 
+											   // if tabs are used in a popup window the array might not exists
+											 if(!top.DTM_currentTabs) {
+											   top.DTM_currentTabs = new Array();
+											 }
+									 
+											 function DTM_activate(idBase,index,doToogle)  { //
+												 // Hiding all:
+											   if (DTM_array[idBase])  {
+												 for(cnt = 0; cnt < DTM_array[idBase].length ; cnt++)  {
+												   if (DTM_array[idBase][cnt] != idBase+"-"+index) {
+													document.getElementById(DTM_array[idBase][cnt]+"-DIV").style.display = "none";
+													 document.getElementById(DTM_array[idBase][cnt]+"-MENU").attributes.getNamedItem("class").nodeValue = "tab";
+												   }
+												 }
+											  }
+									 
+												 // Showing one:
+											   if (document.getElementById(idBase+"-"+index+"-DIV")) {
+												 if (doToogle && document.getElementById(idBase+"-"+index+"-DIV").style.display == "block")  {
+												   document.getElementById(idBase+"-"+index+"-DIV").style.display = "none";
+												   if(DTM_origClass=="") {
+													 document.getElementById(idBase+"-"+index+"-MENU").attributes.getNamedItem("class").nodeValue = "tab";
+												   } else {
+													 DTM_origClass = "tab";
+												   }
+												   top.DTM_currentTabs[idBase] = -1;
+												 } else {
+												   document.getElementById(idBase+"-"+index+"-DIV").style.display = "block";
+												   if(DTM_origClass=="") {
+													 document.getElementById(idBase+"-"+index+"-MENU").attributes.getNamedItem("class").nodeValue = "tabact";
+												   } else {
+													 DTM_origClass = "tabact";
+												   }
+												   top.DTM_currentTabs[idBase] = index;
+												 }
+											   }
+											 }
+											 function DTM_toggle(idBase,index,isInit)  { //
+												 // Showing one:
+											  if (document.getElementById(idBase+"-"+index+"-DIV")) {
+												 if (document.getElementById(idBase+"-"+index+"-DIV").style.display == "block")  {
+												   document.getElementById(idBase+"-"+index+"-DIV").style.display = "none";
+												   if(isInit) {
+													 document.getElementById(idBase+"-"+index+"-MENU").attributes.getNamedItem("class").nodeValue = "tab";
+												   } else {
+													 DTM_origClass = "tab";
+												   }
+												   top.DTM_currentTabs[idBase+"-"+index] = 0;
+												 } else {
+												   document.getElementById(idBase+"-"+index+"-DIV").style.display = "block";
+												   if(isInit) {
+													 document.getElementById(idBase+"-"+index+"-MENU").attributes.getNamedItem("class").nodeValue = "tabact";
+												   } else {
+													 DTM_origClass = "tabact";
+												   }
+												   top.DTM_currentTabs[idBase+"-"+index] = 1;
+												 }
+											   }
+											 }
+									 
+											function DTM_mouseOver(obj) { //
+												 DTM_origClass = obj.attributes.getNamedItem('class').nodeValue;
+												 obj.attributes.getNamedItem('class').nodeValue += "_over";
+											 }
+									 
+											function DTM_mouseOut(obj) {  //
+												 obj.attributes.getNamedItem('class').nodeValue = DTM_origClass;
+												 DTM_origClass = "";
+        }
+											
+											</script>
+											
+											<!-- Tab menu -->
+											<table cellspacing="0" cellpadding="0" border="0" class="typo3-dyntabmenu">
+												<tbody>
+													<tr>
+														<td nowrap="nowrap" onmouseout="DTM_mouseOut(this);" onmouseover="DTM_mouseOver(this);" id="DTM-mapapp-1-MENU" class="tabact"><a onclick="this.blur(); DTM_activate('DTM-mapapp','1', 0); return false;" href="#">Preview<img alt="" class="t3-TCEforms-reqTabImg" src="gfx/clear.gif" name="DTM-108be55c80-1-REQ"></a></td>
+														<td nowrap="nowrap" onmouseout="DTM_mouseOut(this);" onmouseover="DTM_mouseOver(this);" id="DTM-mapapp-2-MENU" class="tab"><a onclick="this.blur(); DTM_activate('DTM-mapapp','2', 0); return false;" href="#">Download<img alt="" class="t3-TCEforms-reqTabImg" src="gfx/clear.gif" name="DTM-108be55c80-2-REQ"></a></td>
+														
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										
+										<div class="typo3-dyntabmenu-divs">
+				
+											<div class="c-tablayer" id="DTM-mapapp-1-DIV" style="padding:10px;display: block;">
+												
+												<p>This preview does not represend the real size on different mobile units.</p>
+												<div class="appPreview" style="">
+													<div class="" style="-moz-transform: scale(0.65);-moz-transform-origin: 0 0;">
+														<div class="mobileUnit" style="width:490px;height:820px;text-align:center;padding:10px;border-radius:4px;border:3px solid #bbbbbb;background:#000000">
+															<div id="mobileFrame" class="mobileScreen" style="border:1px solid #dddddd;width:480px;height:800px;background:#ffffff">
+																
+																<div style="clear:both"></div>
+															</div>
+														</div>
+													</div>	
+												</div>
+												<div class="clear"></div>
+											</div>
+										
+											<div class="c-tablayer" id="DTM-mapapp-2-DIV" style="display: none;">
+											
+											
+												<div class="buildInfo" style="padding:10px">
+													<f:if condition="{app.buildID}">
+														<f:then>
+															<f:if condition="{app.isDirty}">
+																<f:then>
+																	<div>
+																		The contents of your app has changed, you need to compile.
+																		<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+
+																	</div>
+																</f:then><f:else>
+																	<p>Fetching downloads, please wait</p>
+																	<div id="compileFrameContainer"></div>
+																</f:else>
+															</f:if>	
+														</f:then><f:else>
+															Your need to compile your app first.
+															<span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:compileApp" />"><f:link.action action="buildApp" controller="BuildApps" arguments="{factory: factory,app: app}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_get.png" alt="Compile App" /></f:link.action></span>
+														</f:else>
+													</f:if>
+													
+												</div>	
+												<div class="clear"></div>
+											</div>
+										</div>	
+										<script type="text/javascript">
+											
+											
+											
+										DTM_array["DTM-mapapp"] = new Array();
+										DTM_array["DTM-mapapp"][0] = "DTM-mapapp-1";
+										DTM_array["DTM-mapapp"][1] = "DTM-mapapp-2";
+										//DTM_array["DTM-mapapp"][2] = "DTM-mapapp-3";
+										DTM_activate("DTM-mapapp", top.DTM_currentTabs["DTM-mapapp"]?top.DTM_currentTabs["DTM-mapapp"]:1, 0); 
+											
+											
+											
+											
+											
+											
+											
+											//doesn't block the load event
+											function createIframe(){
+												var url='<f:link.external uri="../?id={app.startView}">external link</f:link.external>';
+												var i = document.createElement("iframe");
+												i.src = '../?id={app.startView}';
+												i.scrolling = "auto";
+												i.frameborder = "0";
+												i.width = "480px";
+												i.height = "800px";
+												document.getElementById("mobileFrame").appendChild(i);
+
+												var compile = document.createElement("iframe");
+												compile.src = "<f:uri.action action='status' controller='Build' arguments='{app: app}'/>";
+												compile.scrolling = "auto";
+												compile.frameborder = "0";
+												compile.allowTransparency="true";
+												//compile.width = "300px";
+												//compile.height = "800px";
+												document.getElementById("compileFrameContainer").appendChild(compile);
+											  
+											  
+											};
+												
+											// Check for browser support of event handling capability
+											if (window.addEventListener)
+											window.addEventListener("load", createIframe, false);
+											else if (window.attachEvent)
+											window.attachEvent("onload", createIframe);
+											else window.onload = createIframe;
+										</script>
+										<div class="clear"></div>
+									</f:then><f:else>
+								
+								
+								
+										<f:if condition="{factory}">
+											<f:then>
+												<f:if condition="{factory.apps}">
+													<f:then>
+														<table class="typo3-dblist" cellspacing="0" cellpadding="0" border="0">
+															<tr class="t3-row-header">
+																<td colspan="3"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:appsInFactory" /><td>
+															</tr>
+															<tr class="c-headLine">
+																<td class="col-icon"><span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:createApp" />"><f:link.action action="newApp" arguments="{factoryx: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_add.png" alt="Create new App" /></f:link.action></span></td>
+
+																<td colspan="3">&nbsp</td>
+															</tr>
+															
+															<f:for each="{factory.apps}" as="appx">
+																<tr>
+																	<td class="col-icon"><span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:viewApp" />"><f:link.action action="list" arguments="{app: appx, factory: factory}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application.png" alt="View App" /></f:link.action></span></td>
+																	
+																	<td class="col-title">{appx.name}</td>
+																</tr>	
+															</f:for>
+															
+														</table>
+													</f:then><f:else>
+														<p><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:noAppsInFactory" /></p>
+														<p><f:link.action action="newApp" arguments="{factoryx: factory}" style="color:blue;text-decoration:underline;"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:createFirstApp" /></f:link.action>
+													</f:else>
+												</f:if>
+												
+												
+												
+												
+												
+												
+											</f:then><f:else>
+												<f:if condition="{factories}">
+													<f:then>
+														<table class="typo3-dblist" cellspacing="0" cellpadding="0" border="0">
+															<tr class="t3-row-header">
+																<td colspan="3"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:factories" /><td>
+															</tr>
+															<tr class="c-headLine">
+																<td class="col-icon"><span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:addFactory" />"><f:link.action action="newFactory" ><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_cascade_add.png" alt="Create new App" /></f:link.action></span></td>
+
+																<td colspan="3">&nbsp</td>
+															</tr>
+															
+															<f:for each="{factories}" as="factoryx">
+																<tr>
+																	<td class="col-icon"><span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:editFactory" />"><f:link.action action="editFactory" arguments="{factory: factoryx}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_cascade_edit.png" alt="Edit App" /></f:link.action></span></td>
+																	<td class="col-icon"><span title="<f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:viewFactory" />"><f:link.action action="list"  arguments="{factory: factoryx}"><f:image src="EXT:mobileappfactory/Resources/Public/Icons/application_cascade.png" alt="Compile App" /></f:link.action></span></td>
+																	<td class="col-title">{factoryx.name}</td>
+																</tr>	
+															</f:for>
+															
+														</table>
+													</f:then><f:else>
+														<p><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:noFactories" /></p>
+														<p><f:link.action action="newFactory" style="color:blue;text-decoration:underline;"><f:translate key="LLL:EXT:mobileappfactory/Resources/Private/Language/locallang_mod.xml:addFactory" /></f:link.action>
+													</f:else>
+												</f:if>
+											</f:else>
+										</f:if>
+									</f:else>
+								
+								</f:if>
+							</f:then><f:else>
+								 <f:render partial="installinfo"  />
+							</f:else>
+						</f:if>
+					</f:else>
+				</f:if>
+			</div>
+		</div>
+	</div>	
+	
+	
+	
+</f:be.container>

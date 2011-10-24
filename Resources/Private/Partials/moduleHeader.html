@@ -1,0 +1,50 @@
+
+<h1>Mobile App builder</h1>
+<p>{isForm}</p>
+<div class="typo3-fulldoc">
+	<div id="typo3-docheader">
+		<div id="typo3-docheader-row1">
+			<f:if condition="{isForm}">
+				<f:then>
+					<span style="float:left"><f:be.buttons.icon uri="<f:uri.action action='{cancelAction}' arguments='{factory: factoryx,app: appx}'/>" icon="closedok" title="cancel" /></span>
+					<span class="t3-row-header" style="float:left">{title}</span>
+				</f:then><f:else>
+					<span class="t3-row-header" style="float:left">Factory:</span>
+					<span style="float:left">
+						<f:be.menus.actionMenu>
+							<f:for each="{factoriesx}" as="factory">
+								<f:be.menus.actionMenuItem label="{factory.name}" controller="BuildApps" action="list" arguments="{factory: factory}" />
+							</f:for>
+						</f:be.menus.actionMenu>
+					</span>
+					<span style="float:left"><f:be.buttons.icon uri="<f:uri.action action='editFactory' arguments='{factory: factoryx}'/>" icon="edit2" title="edit factory" /></span>
+					<span style="float:left"><f:be.buttons.icon uri="<f:uri.action action='newFactory'/>" icon="new_el" title="Create new factory" /></span>
+				</f:else>
+			</f:if>
+		</div>
+		<f:if condition="{title}">
+			<f:then>
+				<div id="typo3-docheader-row2">
+					<b>{title}</b>
+				</div>
+			</f:then><f:else>
+			<div id="typo3-docheader-row2">
+					{title}
+				</div>
+				<f:if condition="{factory.apps}">
+					<div id="typo3-docheader-row2">
+						<span style="float:left"><b>App:</b></span>
+						<span style="float:left">
+							<f:be.menus.actionMenu>
+								<f:for each="{factoryx.apps}" as="app">
+									<f:be.menus.actionMenuItem label="{app.name}" controller="BuildApps"  action="list" arguments="{app: app}"/>
+								</f:for>
+							</f:be.menus.actionMenu>
+						</span>
+						<span style="float:left"><f:be.buttons.icon uri="<f:uri.action action='newFactory'/>" icon="new_el" title="Create new factory" /></span>
+					</div>
+				</f:if>	
+			</f:else>
+		</f:if>
+	</div>	
+</div>

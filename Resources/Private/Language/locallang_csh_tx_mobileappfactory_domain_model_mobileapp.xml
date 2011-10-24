@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_mobileappfactory_domain_model_mobileapp</description>
+        <type>CSH</type>
+        <csh_table>tx_mobileappfactory_domain_model_mobileapp</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="name.description">Name of application</label>
+			<label index="version.description">Version number for app</label>
+			<label index="description.description">Description of app</label>
+			<label index="buildid.description">id from build system</label>
+			<label index="icon.description">id from build system</label>
+			<label index="build_time.description">Time for last build</label>
+			<label index="is_dirty.description">Does the app need a rebuild</label>
+			<label index="template.description">template used for this app</label>
+			<label index="splash.description">Application splash image for this app</label>
+			<label index="platforms.description">Platforms</label>
+			<label index="queue_items.description">Items in build queue that belongs to this app</label>
+			<label index="mobiledb.description">Items in build queue that belongs to this app</label>
+		</languageKey>
+    </data>
+</T3locallang>

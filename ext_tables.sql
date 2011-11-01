@@ -5,6 +5,7 @@ CREATE TABLE tx_mobileappfactory_domain_model_mobileapp (
 	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	
+	mobilefactory int(11) unsigned DEFAULT '0',
 	appfolder int(11) unsigned DEFAULT '0',
 	datafolder int(11) unsigned DEFAULT '0',
 	views int(11) unsigned DEFAULT '0',
@@ -288,6 +289,7 @@ CREATE TABLE tx_mobileappfactory_mobilefactory_mobileapp_mm (
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 ALTER TABLE tx_mobileappfactory_domain_model_mobilefactory ADD factorypage int(11) unsigned DEFAULT '0';
 
+ALTER TABLE tx_mobileappfactory_domain_model_mobileapp ADD mobilefactory int(11) unsigned DEFAULT '0',
 ALTER TABLE tx_mobileappfactory_domain_model_mobileapp ADD appfolder int(11) unsigned DEFAULT '0';
 ALTER TABLE tx_mobileappfactory_domain_model_mobileapp ADD datafolder int(11) unsigned DEFAULT '0';
 ALTER TABLE tx_mobileappfactory_domain_model_mobileapp ADD views int(11) unsigned DEFAULT '0';

@@ -198,8 +198,8 @@ protected function retrievePageConfig() {
 		$this->view->assign('factory',$factory);
 		$this->view->assign('app',$app);
 		
-		if (updateTree)
-			t3lib_BEfunc::getSetUpdateSignal('updatePageTree');
+		if ($updateTree)
+			t3lib_BEfunc::setUpdateSignal('updatePageTree');
        
     }
 	
